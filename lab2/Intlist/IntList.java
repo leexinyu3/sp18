@@ -81,8 +81,13 @@ public class IntList {
      */
 
     public static IntList dcatenate(IntList A, IntList B) {
-        //TODO:  fill in method
-        return null;
+        IntList ptr = A;
+        while (ptr.rest !=null){
+            ptr =ptr.rest;
+        }
+        ptr.rest = B;
+        return A;
+
     }
 
     /**
@@ -90,9 +95,72 @@ public class IntList {
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
+        IntList res = new IntList(A.first,null);
+        IntList ptr = res;
+        A = A.rest;
+        while(A!=null){
+            IntList p = new IntList();
+            p.first = A.first;
+            p.rest = null;
+            ptr.rest = p;
+            ptr = ptr.rest;
+            A = A.rest;
+        }
+            ptr.rest = B;
+        return res;
+
         //TODO:  fill in method
-        return null;
+
+
+
+
     }
+
+    public static IntList reverse(IntList A) {
+        if (A == null||A.rest == null)
+            return A;
+        /******推荐，不会改变链表结构****/
+        IntList tmp=A.rest;
+        IntList reversed = reverse(A.rest);
+        tmp.rest = A;
+        A.rest = null;
+        return reversed;
+
+       /******************** 遍历
+        IntList cur=A.rest;
+        IntList pre =A;
+        pre.rest = null;
+        IntList tmp = new IntList();
+        tmp = cur.rest;
+
+
+        while (tmp!=null){
+
+            cur.rest = pre;
+            pre = cur;
+            cur = tmp;
+            tmp = cur.rest;
+
+        }
+        cur.rest = pre;
+
+        return cur;
+  不推荐会改变A链表顺序********/
+
+/****************
+        IntList tmp = A;
+        IntList ptr = A;
+        A = null;
+        while (tmp != null) {
+            tmp = tmp.rest;
+            ptr.rest = A;
+            A = ptr;
+            ptr = tmp;
+        }
+        return A;
+ ****************/
+    }
+
 
 
 
