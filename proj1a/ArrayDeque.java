@@ -98,6 +98,13 @@ public class ArrayDeque<T> {
            tail -= 1;
         }
         size = size -1;
+
+        if (tail - header <= items.length /2 - 1){
+            resize(size/ 2);
+        }
+        if ( header- tail >= items.length /2 - 1){
+            resize(size/ 2);
+        }
         return returnItem;
     }
 
@@ -109,6 +116,13 @@ public class ArrayDeque<T> {
         items[header] = null;
         header = (header +1) % items.length;
         size = size -1;
+
+        if (tail - header <= items.length /2 - 1){
+            resize(size/ 2);
+        }
+        if ( header- tail >= items.length /2 - 1){
+            resize(size/ 2);
+        }
         return returnItem;
     }
 
