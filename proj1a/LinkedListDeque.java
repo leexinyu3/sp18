@@ -129,6 +129,16 @@ public class LinkedListDeque <T> {
         }
         return n.item;
     }
+    
+      public int getLength(){
+        Node n = sentinel.next;
+        int count = 0;
+        while( n!=sentinel){
+            n = n.next;
+            count +=1;
+        }
+        return count;
+    }
 
 
 }
