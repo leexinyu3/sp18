@@ -90,9 +90,7 @@ public class ArrayDeque<T> {
 
 
     public T removeLast() {
-        if (isEmpty())
-            return null;
-
+        if (this.isEmpty()) throw new java.util.NoSuchElementException();
         T returnItem = items[tail];
         items[tail] = null;
 
@@ -104,25 +102,19 @@ public class ArrayDeque<T> {
         }
         size = size -1;
 
-        if (size <= items.length /2 && size >=8 ){
-            resize(items.length/ 2);
-        }
 
         return returnItem;
     }
 
     public T removeFirst() {
-        if (isEmpty())
-            return null;
-
+        if (this.isEmpty()) throw new java.util.NoSuchElementException();
+        
         T returnItem = items[header];
         items[header] = null;
         header = (header +1) % items.length;
         size = size -1;
 
-        if (size <= items.length /2 && size >=8 ){
-            resize(items.length/ 2);
-        }
+
 
         return returnItem;
     }
