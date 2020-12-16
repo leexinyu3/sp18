@@ -16,7 +16,7 @@ public class ArrayDeque<T> {
 
     private void resize(int cap) {
         T[] a = (T []) new Object[cap];
-        int n = items.length - 1;
+
         if (tail - header == (items.length - 1))
             System.arraycopy(items, header, a, 0, size);
         if (tail + 1 ==header){
@@ -24,7 +24,12 @@ public class ArrayDeque<T> {
             System.arraycopy(items, 0, a, items.length-header, tail + 1 );}
         items = a;
         header = 0;
-        tail = n;
+        if (size == 0){
+            tail = 0;
+        }
+        else
+            tail = size - 1;
+
     }
 
 
@@ -99,12 +104,10 @@ public class ArrayDeque<T> {
         }
         size = size -1;
 
-        if (tail - header <= items.length /2 - 1){
-            resize(size/ 2);
+        if (size <= items.length /2 && size >=8 ){
+            resize(items.length/ 2);
         }
-        if ( header- tail >= items.length /2 - 1){
-            resize(size/ 2);
-        }
+
         return returnItem;
     }
 
@@ -117,12 +120,10 @@ public class ArrayDeque<T> {
         header = (header +1) % items.length;
         size = size -1;
 
-        if (tail - header <= items.length /2 - 1){
-            resize(size/ 2);
+        if (size <= items.length /2 && size >=8 ){
+            resize(items.length/ 2);
         }
-        if ( header- tail >= items.length /2 - 1){
-            resize(size/ 2);
-        }
+
         return returnItem;
     }
 
