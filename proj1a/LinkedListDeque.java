@@ -130,7 +130,7 @@ public class LinkedListDeque <T> {
         return n.item;
     }
     
-      public int getLength(){
+      private int getLength(){
         Node n = sentinel.next;
         int count = 0;
         while( n!=sentinel){
