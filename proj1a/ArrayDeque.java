@@ -24,12 +24,7 @@ public class ArrayDeque<T> {
             System.arraycopy(items, 0, a, items.length-header, tail + 1 );}
         items = a;
         header = 0;
-        if (size == 0){
-            tail = 0;
-        }
-        else
-            tail = size - 1;
-
+        tail = size - 1;
     }
 
 
@@ -91,6 +86,7 @@ public class ArrayDeque<T> {
 
     public T removeLast() {
         if (this.isEmpty()) throw new java.util.NoSuchElementException();
+
         T returnItem = items[tail];
         items[tail] = null;
 
@@ -103,12 +99,13 @@ public class ArrayDeque<T> {
         size = size -1;
 
 
+
         return returnItem;
     }
 
     public T removeFirst() {
         if (this.isEmpty()) throw new java.util.NoSuchElementException();
-        
+
         T returnItem = items[header];
         items[header] = null;
         header = (header +1) % items.length;
@@ -120,8 +117,15 @@ public class ArrayDeque<T> {
     }
 
     public T get(int i) {
+
+        i = header + i;
+        if (i> items.length - 1) {
+            i -= items.length;
+        }
         return items[i];
     }
+
+ 
 
 
     private int getLength() {
