@@ -85,8 +85,12 @@ public class ArrayDeque<T> {
 
 
     public T removeLast() {
-        if (this.isEmpty()) throw new java.util.NoSuchElementException();
-
+        if (this.isEmpty()){
+            size = 0;
+            throw new java.util.NoSuchElementException();
+        }
+        else 
+            size = size -1;
         T returnItem = items[tail];
         items[tail] = null;
 
@@ -96,23 +100,21 @@ public class ArrayDeque<T> {
         else{
            tail -= 1;
         }
-        size = size -1;
-
-
-
         return returnItem;
     }
 
     public T removeFirst() {
-        if (this.isEmpty()) throw new java.util.NoSuchElementException();
+        if (this.isEmpty()){
+            size = 0;
+            throw new java.util.NoSuchElementException();
+
+        }
+        else
+            size = size -1;
 
         T returnItem = items[header];
         items[header] = null;
         header = (header +1) % items.length;
-        size = size -1;
-
-
-
         return returnItem;
     }
 
@@ -125,7 +127,7 @@ public class ArrayDeque<T> {
         return items[i];
     }
 
- 
+
 
 
     private int getLength() {
