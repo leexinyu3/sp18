@@ -16,15 +16,33 @@ public class ArrayDeque<T> {
 
     private void resize(int cap) {
         T[] a = (T []) new Object[cap];
+        if (cap  > items.length) {
 
-        if (tail - header == (items.length - 1))
-            System.arraycopy(items, header, a, 0, size);
-        if (tail + 1 ==header){
-            System.arraycopy(items, header, a, 0, items.length-header);
-            System.arraycopy(items, 0, a, items.length-header, tail + 1 );}
+            if (tail - header == (items.length - 1))
+                System.arraycopy(items, header, a, 0, size);
+            if (tail + 1 == header) {
+                System.arraycopy(items, header, a, 0, items.length - header);
+                System.arraycopy(items, 0, a, items.length - header, tail + 1);
+            }
+        }
+        else{
+            if (tail >= header){
+                System.arraycopy(items, header, a, 0, size);
+
+            }
+
+            else{
+                System.arraycopy(items, header, a, 0, items.length - header);
+                System.arraycopy(items, 0, a, items.length - header, tail + 1);
+            }
+
+        }
+
         items = a;
         header = 0;
         tail = size - 1;
+
+
     }
 
 
@@ -87,7 +105,7 @@ public class ArrayDeque<T> {
     public T removeLast() {
         if (this.isEmpty()) return null;
         /** Resize down */
-     
+
         T returnItem = items[tail];
         items[tail] = null;
 
@@ -125,6 +143,7 @@ public class ArrayDeque<T> {
         if (i> items.length - 1) {
             i -= items.length;
         }
+        T getitem = items[i];
         return items[i];
     }
 
