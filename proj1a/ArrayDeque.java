@@ -86,7 +86,8 @@ public class ArrayDeque<T> {
 
     public T removeLast() {
         if (this.isEmpty()) return null;
-
+        /** Resize down */
+     
         T returnItem = items[tail];
         items[tail] = null;
 
@@ -97,11 +98,9 @@ public class ArrayDeque<T> {
            tail -= 1;
         }
         size = size -1;
-
-        if ((int) (0.25 * items.length) > size && items.length >= 16) {
+        if ((int) 0.25 * items.length > size && items.length >= 16) {
             resize((int) (0.5 * items.length));
         }
-
         return returnItem;
     }
 
@@ -112,12 +111,13 @@ public class ArrayDeque<T> {
         items[header] = null;
         header = (header +1) % items.length;
         size = size -1;
-
-        if ((int) 0.25 * items.length > size && items.length >= 16) {
+        if ((int) (0.25 * items.length) > size && items.length >= 16) {
             resize((int) (0.5 * items.length));
         }
         return returnItem;
     }
+
+
 
     public T get(int i) {
 
