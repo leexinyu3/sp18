@@ -220,17 +220,25 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             if(item.equals(contents[i].item())){
                 contents[i].myPriority = priority;
                 index = i;
-                break;}
+                break;
+            }
             }
         if(index == -1) return;
-        
-        if(contents[parentIndex(index)].priority()>contents[index].priority()){
-            swim(index);
-        }
-        int min  = min(leftIndex(index),rightIndex(index));
-        if(contents[min].priority()<contents[index].priority()){
+        if(index == 1){
             sink(index);
         }
+        else if (leftIndex(index) > size){
+            swim(index);
+        }
+        else {
+            if(contents[parentIndex(index)].priority()>contents[index].priority()){
+                swim(index);
+            }
+            int min  = min(leftIndex(index),rightIndex(index));
+            if(contents[min].priority()<contents[index].priority()){
+                 sink(index);
+             }
+         }
 
 
     }
