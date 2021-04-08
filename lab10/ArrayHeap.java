@@ -212,24 +212,37 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      * bonus problem, but shouldn't be too hard if you really understand heaps
      * and think about the algorithm before you start to code.
      */
-    @Override
+      @Override
     public void changePriority(T item, double priority) {
         /* TODO: Your code here! */
         int index = -1;
-        for(int i =1;i<=size;i++){
-            if(item.equals(contents[i].item())){
-                contents[i].myPriority = priority;
+        for (int i = 1; i < size; i++){
+            if (contents[i].myItem.equals(item)){
                 index = i;
-                break;}
             }
-        if(contents[parentIndex(index)].priority()>contents[index].priority()){
-            swim(index);
         }
-        int min  = min(leftIndex(index),rightIndex(index));
-        if(contents[min].priority()<contents[index].priority()){
-            sink(index);
+        if (index == -1){
+            return;
+        }
+        contents[index].myPriority = priority;
+        if (size == 1){
+            return;
         }
 
+
+        if(index == 1){
+            sink(index);
+        }
+        else if (leftIndex(index) > size){
+            swim(index);
+        }else{
+            if(min(index,parentIndex(index)) == index){
+                swim(index);
+            }
+            else if (min(min(leftIndex(index),rightIndex(index)), index) != index){
+                sink(index);
+            }
+        }
 
     }
 
