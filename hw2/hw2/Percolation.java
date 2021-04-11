@@ -23,8 +23,8 @@ public class Percolation {
         QU = new WeightedQuickUnionUF(N * N + 2);
 
         for(int j = 0;j<N;j++){
-            QU.union(arr1[0][j] , N*N);
-            QU.union(arr1[N-1][j] , N*N+1);
+            QU.union(arr1[0][j] , N*N+1);
+            QU.union(arr1[N-1][j] , N*N);
         }
 
     }
@@ -64,7 +64,7 @@ public class Percolation {
         if (!isOpen(row,col)){
             return false;
         }
-        return QU.connected(arr1[row][col], arr.length* arr.length);
+        return QU.connected(arr1[row][col], arr.length* arr.length+1);
     }
     // number of open sites
     public int numberOfOpenSites(){
