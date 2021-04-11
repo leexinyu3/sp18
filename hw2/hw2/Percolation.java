@@ -6,6 +6,8 @@ public class Percolation {
     private boolean[][] arr;
     private  int[][] arr1;
     private WeightedQuickUnionUF QU;
+    private WeightedQuickUnionUF backwash;
+
     private int count = 0;
 
 
@@ -21,11 +23,18 @@ public class Percolation {
             }
         }
         QU = new WeightedQuickUnionUF(N * N + 2);
+        backwash = new WeightedQuickUnionUF(N * N + 1);
 
         for(int j = 0;j<N;j++){
-            QU.union(arr1[0][j] , N*N+1);
-            QU.union(arr1[N-1][j] , N*N);
+            QU.union(arr1[0][j] , N*N);
+            QU.union(arr1[N-1][j] , N*N+1);
+
+            backwash.union(arr1[0][j] , N*N);
+
+
         }
+
+
 
     }
 
@@ -44,19 +53,23 @@ public class Percolation {
             count+=1;
         if (isOpen(row-1,col)){
             QU.union((row-1)*arr.length+col,arr1[row][col]);
-        }
+            backwash.union((row-1)*arr.length+col,arr1[row][col]);
+            }
         if (isOpen(row+1,col)){
             QU.union((row+1)*arr.length+col,arr1[row][col]);
-        }
+            backwash.union((row+1)*arr.length+col,arr1[row][col]);
+            }
         if (isOpen(row,col-1)){
             QU.union(row*arr.length+col-1,arr1[row][col]);
-        }
+            backwash.union(row*arr.length+col-1,arr1[row][col]);
+            }
+
         if (isOpen(row,col+1)){
             QU.union(row*arr.length+col+1,arr1[row][col]);
+            backwash.union(row*arr.length+col+1,arr1[row][col]);
+            }
         }
 
-
-        }
 
 
     }
@@ -64,7 +77,7 @@ public class Percolation {
         if (!isOpen(row,col)){
             return false;
         }
-        return QU.connected(arr1[row][col], arr.length* arr.length+1);
+        return backwash.connected(arr1[row][col], arr.length* arr.length);
     }
     // number of open sites
     public int numberOfOpenSites(){
