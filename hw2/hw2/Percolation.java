@@ -72,20 +72,18 @@ public class Percolation {
     }
 
     public boolean percolates() {
+        if(arr.length == 1){
+            if(!isOpen(0,0)) return false;
+        }
+
         return QU.connected(arr.length*arr.length, arr.length* arr.length+1);
     }
 
 
     public static void main(String[] args)   {
-        Percolation universe = new Percolation(5);
-        universe.open(3,4);
-        universe.open(2,4);
-        universe.open(2,2);
-        universe.open(2,3);
-        universe.open(0,2);
-        universe.open(1,2);
-        universe.open(4,4);
-        System.out.println(universe.isFull(0,2));
+        Percolation universe = new Percolation(2);
+        universe.open(0,0);
+        universe.open(1,0);
         System.out.println(universe. percolates() );
 
     }
