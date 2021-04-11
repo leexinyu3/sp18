@@ -7,7 +7,7 @@ import java.util.Random;
 public class PercolationStats {
         private Random RANDDOM  = new Random(565);
         private  double sum=0;
-        Percolation []p;
+        private Percolation []p;
         private double[] x;
 
         public PercolationStats(int N, int T, PercolationFactory pf){
@@ -16,7 +16,7 @@ public class PercolationStats {
                 }
                 p = new Percolation[T];
                 x = new double[T];
-                for(int i = 0;i<T;i++){
+                for(int i = 0; i<T; i++){
                         p[i] = pf.make(N);
                         while(!p[i].percolates()){
                                 int a = RANDDOM.nextInt(N);
@@ -39,7 +39,7 @@ public class PercolationStats {
                        res+=(xi-mean)* (xi-mean);
                 }
 
-                return Math.sqrt(res);
+                return Math.sqrt(res/(x.length-1));
         }// sample standard deviation of percolation threshold
         public double confidenceLow(){
                return mean()-1.96*stddev()/Math.sqrt(x.length);
@@ -50,7 +50,7 @@ public class PercolationStats {
 
         } // high endpoint of 95% confidence interval
 
-        public static void main(String[] args){
+        private static void main(String[] args){
                 PercolationFactory pf = new PercolationFactory();
                 PercolationStats ps = new PercolationStats(80,100,pf);
                 System.out.println(ps.mean());

@@ -37,13 +37,11 @@ public class Percolation {
         return arr[row][col];
     }
     public void open(int row, int col){
-        count+=1;
-        if (isOpen(row,col)){
-           return ;
-        }
-        if(!isOpen(row,col))
-            arr[row][col] = true;
+        if (isOpen(row,col)) return ;
 
+        else{
+            arr[row][col] = true;
+            count+=1;
         if (isOpen(row-1,col)){
             QU.union((row-1)*arr.length+col,arr1[row][col]);
         }
@@ -55,6 +53,9 @@ public class Percolation {
         }
         if (isOpen(row,col+1)){
             QU.union(row*arr.length+col+1,arr1[row][col]);
+        }
+
+
         }
 
 
@@ -75,7 +76,7 @@ public class Percolation {
     }
 
 
-    public static void main(String[] args)   {
+    private static void main(String[] args)   {
         Percolation universe = new Percolation(5);
         universe.open(3,4);
         universe.open(2,4);
