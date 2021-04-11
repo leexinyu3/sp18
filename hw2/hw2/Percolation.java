@@ -94,11 +94,14 @@ public class Percolation {
 
 
     public static void main(String[] args)   {
-        Percolation universe = new Percolation(2);
+        Percolation universe = new Percolation(3);
         universe.open(0,0);
         universe.open(1,0);
+        universe.open(2,0);
+        universe.open(2,2);
         System.out.println(universe. percolates() );
-
+        System.out.println(universe.isFull(2,0) );
+        System.out.println(universe.isFull(2,2) );
     }
 }
 
